@@ -18,11 +18,7 @@ exports.getCards = async (req, res) => {
 
 exports.createCard = async (req, res) => {
   try {
-    // let cardItem = {
-    //   name: req.body.name,
-    //   description: req.body.description,
-    //   //   image: req.file.path,
-    // };
+    
     let card = await Card.create(req.body);
     res.status(200).json({
       status: true,
@@ -56,16 +52,17 @@ exports.getCardById = async (req, res) => {
 exports.patchCard = async (req, res, next) => {
   try {
     let id = req.params.id;
-    let card = Card.findById(id);
-    let updatedCardItem = {
-      name: req.body.name,
-      description: req.body.description,
-      //   image: req.file.path,
-    };
+    console.log(id);
+    let card = await Card.findById(id);
 
-    card = updatedCardItem;
+    console.log(card);
+    card.name = req.body.name;
 
-    let cardDetails = await Card.updateOne(card);
+    card.description = req.body.description;
+
+    console.log(card.name);
+    let cardDetails = await card.save();
+    console.log(cardDetails);
     res.status(200).json({
       status: true,
       data: cardDetails,

@@ -4,6 +4,11 @@ const Card = require("../models/card");
 exports.getLists = async (req, res) => {
   try {
     let lists = await List.find();
+    for (const list in lists) {
+      let id = lists[list]._id;
+      let listItem = await List.findById(id).populate("cards");
+      lists[list].cards = listItem.cards;
+    }
     res.status(200).json({
       data: lists,
     });
@@ -73,15 +78,13 @@ exports.patchList = async (req, res, next) => {
   try {
     let id = req.params.id;
     let list = await List.findById(id);
-    let updatedList = {
-      name: req.body.name,
-    };
-    list = updatedList;
-    let listDetails = await List.updateOne(list);
+    list.name = req.body.name;
+
+    let listDetails = await list.save();
     res.status(200).json({
       status: true,
       data: list,
-      msg:id,
+      msg: id,
     });
   } catch (err) {
     res.status(500).json({
@@ -110,10 +113,9 @@ exports.getAllCards = async (req, res, next) => {
 exports.addCardToList = async (req, res, next) => {
   try {
     let id = req.params.id;
-    //   req.parentListId=id;
+
     let card = await Card.create(req.body);
 
-    // let list = List.findById(id);
     let listDetails = await List.findOneAndUpdate(
       { _id: id },
       { $push: { cards: card._id } },

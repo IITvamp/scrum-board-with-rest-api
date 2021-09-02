@@ -15,7 +15,6 @@ mongoose
     {
       useUnifiedTopology: true,
       useNewUrlParser: true,
-        //   useFindAndModify: false,
     }
   )
   .then((res) => console.log("conneceted"))
@@ -23,12 +22,6 @@ mongoose
 
 const listRoute = require("./api/routes/list");
 const cardRoute = require("./api/routes/card");
-
-// app.use("/", (req, res, next) => {
-//   res.status(200).json({
-//     message: "its working",
-//   });
-// });
 
 app.use("/list", listRoute);
 app.use("/cards", cardRoute);
