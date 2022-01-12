@@ -11,7 +11,7 @@ app.use(express.json());
 const mongoose = require("mongoose");
 mongoose
   .connect(
-    "mongodb+srv://user2:ayush123@cluster0.qjzkf.mongodb.net/scrumBoard?retryWrites=true&w=majority",
+    "mongodb+srv://User1:user123@cluster0.zbqd2.mongodb.net/scrumBoard?retryWrites=true&w=majority",
     {
       useUnifiedTopology: true,
       useNewUrlParser: true,
