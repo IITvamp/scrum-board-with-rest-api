@@ -8,6 +8,8 @@ app.use(morgan("dev"));
 app.use(cors());
 app.use(express.json());
 
+const PORT = process.env.port || 8011;
+
 const mongoose = require("mongoose");
 mongoose
   .connect(
@@ -26,4 +28,4 @@ const cardRoute = require("./api/routes/card");
 app.use("/list", listRoute);
 app.use("/cards", cardRoute);
 
-app.listen(8011);
+app.listen(PORT);
