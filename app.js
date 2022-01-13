@@ -8,7 +8,7 @@ app.use(morgan("dev"));
 app.use(cors());
 app.use(express.json());
 
-const PORT = process.env.port || 8011;
+const PORT = process.env.PORT || 8011;
 
 const mongoose = require("mongoose");
 mongoose
